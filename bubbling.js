@@ -15,10 +15,10 @@ window.onload = function(){
        //pic random color
            let colorOfBubble = Math.floor(Math.random()*10)%colors.length
 
-           let random_offset = Math.floor(Math.random()*1000);
+           let random_offset = Math.floor(Math.random()*100);
 
-            let x = Math.floor(Math.random()*100)%550+random_offset;
-            let y = Math.floor(Math.random()*100)%550+random_offset;
+            let x = (Math.floor(Math.random()*1000)%550)+random_offset;
+            let y = (Math.floor(Math.random()*1000)%550)+random_offset;
 
             let div = document.createElement('div');
             //div.innerHTML = `${i}`;
@@ -35,11 +35,13 @@ window.onload = function(){
             return {x,y,radius,colorOfBubble,div};   //returning the object 
     }   
 
-    const bubbles = [];
+    let bubbles = [];
 
         function init(){
             for(let i=0;i<max_Bubbles;i++){
                 const bubble = makeBubble();
+                console.log(bubble);
+                
                 bubbles.push(bubble);
                 containerBox.appendChild(bubble.div);
                 //console.log(bubble);
@@ -49,6 +51,8 @@ window.onload = function(){
 
         let start = document.querySelector('.start');
 
+        
+        
         init();
 
         // start.addEventListener('click',init());
@@ -65,20 +69,20 @@ window.onload = function(){
         //console.log(bubbles[0].div);
         let new_arr=[];
         function clicked(e){
-            let text = e.target.id;
+            let id = e.target.id;
             console.log(e);
             
-            console.log(bubbles[text].div);
+            let di = document.getElementById(id);
             
-            containerBox.removeChild(bubbles[text].div)
+            containerBox.removeChild(di);
 
-             new_arr= bubbles.filter(elem =>  {
+             bubbles= bubbles.filter(elem =>  {
 
                 // console.log(elem.div);
                 
-                return elem.div!=bubbles[text].div;
+                return elem.div.id!=id;
              });
-          //  console.log(new_arr);
+           //console.log(new_arr);
             
             
             
